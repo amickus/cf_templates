@@ -1,0 +1,31 @@
+{
+    "Description": "Create an EC2 instance running the latest Amazon Linux AMI.",
+    "Parameters": {
+        "KeyPair": {
+            "Description": "The EC2 Key Pair to allow SSH access to the instance",
+            "Type": "String"
+        }
+    },
+ 	"Resources": {
+        "Ec2Instance": {
+            "Properties": {
+                "ImageId": "ami-e5083683",
+                "InstanceType" : "t2.micro",
+                "KeyName": {
+                    "Ref": "KeyPair"
+                },
+                "SecurityGroups" : ["launch-wizard-14"]
+            },
+            "Type": "AWS::EC2::Instance"
+        }
+    },
+    "Outputs": {
+        "InstanceId": {
+            "Description": "The InstanceId of the newly created EC2 instance",
+            "Value": {
+                "Ref": "Ec2Instance"
+            }
+        }
+    },
+    "AWSTemplateFormatVersion": "2010-09-09"
+}
