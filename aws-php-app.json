@@ -4,6 +4,10 @@
   "Description" : "AWS CloudFormation Sample Template: Sample template that can be used to test EC2 updates. **WARNING** This template creates an Amazon Ec2 Instance. You will be billed for the AWS resources used if you create a stack from this template.",
 
   "Parameters" : {
+    "KeyPair": {
+      "Description": "The EC2 Key Pair to allow SSH access to the instance",
+      "Type": "String"
+      },
 
     "InstanceType" : {
       "Description" : "WebServer EC2 instance type",
@@ -138,6 +142,9 @@
         "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
                           { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "InstanceType" }, "Arch" ] } ] },
         "InstanceType"   : { "Ref" : "InstanceType" },
+        "KeyName": {
+            "Ref": "KeyPair"
+        },
         "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
         "UserData"       : { "Fn::Base64" : { "Fn::Join" : ["", [
              "#!/bin/bash -xe\n",
