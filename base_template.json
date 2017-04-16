@@ -10,7 +10,7 @@
         "Ec2Instance": {
             "Properties": {
                 "ImageId": "ami-e5083683",
-                "InstanceType" : "t2.micro",
+                "InstanceType" : "t1.small",
                 "KeyName": {
                     "Ref": "KeyPair"
                 },
